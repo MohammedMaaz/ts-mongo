@@ -179,3 +179,32 @@ ta.assert<
     >
   >
 >()
+
+// Test Pipelink $changeStream
+ta.assert<
+  ta.Extends<
+    { $changeStream: { fullDocument: 'updateLookup' } },
+    TsPipeline<ExampleTSchema, ExampleTSchemaOther>
+  >
+>()
+ta.assert<
+  ta.Not<
+    ta.Extends<
+      {
+        $changeStream: {
+          resumeAfter: ResumeToken
+          startAfter: ResumeToken
+        }
+      },
+      TsPipeline<ExampleTSchema, ExampleTSchemaOther>
+    >
+  >
+>()
+ta.assert<
+  ta.Not<
+    ta.Extends<
+      { $changeStream: { startAtOperationTime: number } },
+      TsPipeline<ExampleTSchema, ExampleTSchemaOther>
+    >
+  >
+>()
