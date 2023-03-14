@@ -1,5 +1,5 @@
 import { Db, Document, MongoClient } from 'mongodb'
-import { mkTsCollection } from '../src'
+import { mkTsCollection, TsCollection } from '../src'
 
 let client: MongoClient | null = null
 let cached: boolean = false
@@ -14,7 +14,9 @@ export const setupDb = async (): Promise<Db> => {
   return client.db() as Db
 }
 
-export const mkTsTestCollection = async <TSchema extends Document>() => {
+export const mkTsTestCollection = async <TSchema extends Document>(): Promise<
+  TsCollection<TSchema>
+> => {
   const db = await setupDb()
   return mkTsCollection<TSchema>(db, Math.random().toString())
 }
