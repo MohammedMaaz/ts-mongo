@@ -9,6 +9,7 @@
     "lib": ["esnext", "dom"],
     "esModuleInterop": true,
     "types": ["node", "jest"],
-    "declaration": true
+    "declaration": true,
+    "baseUrl": "."
   }
 }
